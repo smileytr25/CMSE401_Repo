@@ -2,13 +2,13 @@
 CC = gcc
 CFLAGS = -c
 LIBS = -lm -lpng16
-OPT_FLAGS = -O3  # Optimization flags for serial optimization
+OPT_FLAGS = -O2  # Optimization flags for serial optimization
 OPENMP_FLAGS = -fopenmp  # OpenMP flag for parallelism
 
 # Source files
 SRC_SERIAL = main_process.c png_util.c  # Original serial source files
 SRC_OPTIMIZED = main_process_optimized.c png_util.c  # Optimized serial source files
-SRC_OPENMP = main_process_openmp.c png_util.c  # OpenMP parallel source files
+SRC_OPENMP = main_process_parallel.c png_util.c  # OpenMP parallel source files
 
 # Object files
 OBJ_SERIAL = $(SRC_SERIAL:.c=.o)
@@ -41,8 +41,8 @@ optimized_serial_process.o: main_process_optimized.c
 	$(CC) $(CFLAGS) main_process_optimized.c
 
 # Object files for OpenMP parallel
-parallel_process.o: main_process_openmp.c
-	$(CC) $(CFLAGS) main_process_openmp.c
+parallel_process.o: main_process_parallel.c
+	$(CC) $(CFLAGS) main_process_parallel.c
 
 # Object files for png_util (common to all)
 png_util.o: png_util.c
